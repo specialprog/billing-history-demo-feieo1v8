@@ -1,0 +1,40 @@
+
+select,
+input[type=text] {
+  width: 100%;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  border: 1px solid black;
+  border-radius: 5px;
+  color: black;
+  padding: 5px;
+}
+
+select {
+  height: 1.75rem;
+  padding: 0 5px;
+
+}
+
+select:disabled {
+  color: grey;
+}
+
+.header__controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 2fr;
+  gap: 2rem;
+}
+
+.header__control {
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+
+}
+
+.header__control label {
+  color:black;
+  font-size: .8rem;
+  font-weight: 600;
+}

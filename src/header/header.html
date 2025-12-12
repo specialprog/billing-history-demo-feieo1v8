@@ -1,0 +1,39 @@
+<header>
+  <h1 class="py-5 text-3xl font-bold">
+    Billing History App
+  </h1>
+  <h2 class="py-4 text-xl font-bold">Filters</h2>
+  <div class="header__controls px-3 pb-5">
+    <div class="header__control">
+      <label for="">Status</label>
+      <select  name="status" [(ngModel)]="selectedStatus">
+        <option value="">All</option>
+        <option value="failed">Failed</option>
+        <option value="pending">Pending</option>
+        <option value="successful">Successful</option>
+      </select>
+    </div>
+    <div class="header__control">
+      <label for="">Categories</label>
+      <select name="categorySelect" [(ngModel)]="selectedCategory">
+        <option value="">All</option>
+        @if (categories(); as categories) {
+          @for (category of categories; track $index) {
+            <option [value]="category">{{ category }}</option>
+          }
+        }
+      </select>
+    </div>
+    <div class="header__control">
+      <label for="">Sort Date</label>
+      <select name="sortSelect" [(ngModel)]="selectedDateSort" [disabled]="disableSort()">
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
+      </select>
+    </div>    
+    <div class="header__control">
+      <label>Search</label>
+      <input type="text" name="search" [(ngModel)]="searchText">
+    </div>    
+  </div>
+</header>

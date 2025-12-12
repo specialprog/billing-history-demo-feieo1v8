@@ -1,0 +1,20 @@
+
+@if (error()) {
+  <h1 class="font-bold">{{error()}}</h1>
+} @else {
+
+  @if (transactions()) {
+    @if (!isLoading() && transactions().length) {
+      <app-transaction-table [transactions]="transactions()"></app-transaction-table>
+    }
+    @else if (!isLoading() && !transactions().length) {
+      <h1 class="font-bold">There are no matching transactions.</h1>
+    }
+  }
+  
+  @if (isLoading()) {
+    <h1 class="font-bold">Retrieving transactions...</h1>
+  }
+}
+
+

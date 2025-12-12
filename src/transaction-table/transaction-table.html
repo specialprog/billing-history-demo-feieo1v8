@@ -1,0 +1,68 @@
+<div class="table-container">
+  <!-- @if (selectedTransaction) {
+    <div class="transaction-details pb-5">
+      <h3>Transaction Details</h3>
+      <p><strong>ID:</strong> {{ selectedTransaction.id }}</p>
+      <p><strong>Date:</strong> {{ selectedTransaction.date | date:'short' }}</p>
+      <p><strong>Amount:</strong> {{ selectedTransaction.amount | currency }}</p>
+      <p><strong>Status:</strong> {{ selectedTransaction.status }}</p>
+      <p><strong>Description:</strong> {{ selectedTransaction.description }}</p>
+      <p><strong>Category:</strong> {{ selectedTransaction.category }}</p>
+      <p><strong>Payment Method:</strong> {{ selectedTransaction.paymentMethod }}</p>
+    </div>
+  } -->
+  
+  <table class="transaction-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Date</th>
+        <th>Category</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (tx of transactions; track tx.id) {
+        <tr class="transaction-row"
+            [class.viewed]="selectedTransaction?.id === tx.id">
+
+          <td>{{ tx.id }}</td>
+          <td>{{ tx.date | date:'shortDate' }}</td>
+          <td>{{ tx.category }}</td>
+          <td [class.successful]="tx.status === 'successful'"
+              [class.pending]="tx.status === 'pending'"
+              [class.failed]="tx.status === 'failed'">
+            {{ tx.status }}
+          </td>
+          <td>
+            <a href="#" (click)="toggleTransaction(tx); $event.preventDefault()">
+              {{ expandedTransactionId === tx.id ? 'Hide' : 'Details' }}
+            </a>
+          </td>
+
+      
+        </tr>
+
+        
+        <!-- Collapsible details row -->
+        @if (expandedTransactionId === tx.id) {
+          <tr class="details-row" [class.open]="expandedTransactionId === tx.id">
+            <td colspan="5">
+              <div class="transaction-details">
+                <p><strong>ID:</strong> {{ tx.id }}</p>
+                <p><strong>Date:</strong> {{ tx.date | date:'short' }}</p>
+                <p><strong>Amount:</strong> {{ tx.amount | currency }}</p>
+                <p><strong>Status:</strong> {{ tx.status }}</p>
+                <p><strong>Description:</strong> {{ tx.description }}</p>
+                <p><strong>Category:</strong> {{ tx.category }}</p>
+                <p><strong>Payment Method:</strong> {{ tx.paymentMethod }}</p>
+              </div>
+            </td>
+          </tr>
+        }
+
+      }
+    </tbody>
+  </table>
+</div>
