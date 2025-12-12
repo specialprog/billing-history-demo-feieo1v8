@@ -12,6 +12,12 @@
     </div>
   } -->
   
+  <!-- Paginator -->
+<div class="paginator pb-8">
+<button (click)="prevPage()" [disabled]="currentPage() === 1">Previous</button>
+<span>Page {{ currentPage() }} of {{ totalPages() }}</span>
+<button (click)="nextPage()" [disabled]="currentPage() === totalPages()">Next</button>
+</div>
   <table class="transaction-table">
     <thead>
       <tr>
@@ -23,7 +29,7 @@
       </tr>
     </thead>
     <tbody>
-      @for (tx of transactions; track tx.id) {
+      @for (tx of pagedTransactions(); track tx.id) {
         <tr class="transaction-row"
             [class.viewed]="selectedTransaction?.id === tx.id">
 
@@ -65,4 +71,7 @@
       }
     </tbody>
   </table>
+
+
+
 </div>

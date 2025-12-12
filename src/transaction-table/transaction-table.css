@@ -6,7 +6,8 @@
 .transaction-table {
   width: 100%;
   border-collapse: collapse;
-  font-family: Arial, sans-serif;
+  table-layout: fixed;   /* prevents dynamic resizing */
+
 }
 
 .transaction-table th,
@@ -60,8 +61,12 @@
   overflow: hidden;
   max-height: 0;
   opacity: 0;
-  transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out, padding 0.4s ease-in-out;
   padding: 0 12px;
+  transition:
+    max-height 0.5s ease-in-out,
+    opacity 0.4s ease-in-out,
+    padding 0.4s ease-in-out;
+
 }
 
 
@@ -84,11 +89,38 @@
 
 
 .details-row.open .transaction-details {
-  max-height: 500px; /* enough to fit content */
+  max-height: 600px; /* large enough to fit content */
   opacity: 1;
   padding: 12px;
   background-color: #fafafa;
   border-left: 3px solid #1890ff;
+
+}
+
+.paginator {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  font-family: Arial, sans-serif;
+}
+
+.paginator button {
+  padding: 6px 12px;
+  border: 1px solid #ddd;
+  background-color: #f4f4f4;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.paginator button:hover:not(:disabled) {
+  background-color: #e0e0e0;
+}
+
+.paginator button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 /* Responsive tweaks */
